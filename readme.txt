@@ -3,9 +3,9 @@ Contributors: mmrs151
 Donate link: http://edgwareict.org.uk/
 Tags: prayer time, salah time
 Requires at least: 3.0.1
-Tested up to: 3.4
+Tested up to: 4.2
 Stable tag: 4.3
-License: GPLv2 or later
+License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Display daily prayer time either vertically or horizontally
