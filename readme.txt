@@ -1,5 +1,5 @@
 === Daily Prayer Time ===
-Contributors: mmrs151	
+Contributors: mmrs151
 Donate link: http://edgwareict.org.uk/
 Tags: prayer time, salah time
 Requires at least: 3.0.1
@@ -15,7 +15,7 @@ The widget will allow you
 
 - To display prayer time either vertically or horizontally.
 
-- To display 'Jamah time' only.
+- To display 'Jamah time' only if you chose.
 
 - You can aslo show Hanafi Asr start time.
 
@@ -25,7 +25,8 @@ The widget will allow you
 3. Alternatively you can extract the contents of the zip file directly to your wp-content/plugins/ folder
 4. Finally, just go under Plugins and activate the plugin
 
-This widget requires a database table named 'timetable' in your own wordpress database. 
+= Comprehensive setup =
+This widget requires a database table named 'timetable' in your own wordpress database.
 
 The table definition must follow:
 ```sql
@@ -49,7 +50,7 @@ CREATE TABLE `timetable` (
 ) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8;`
 ```
 
-#####The widget will be usuable once you import your Masjid's prayer timetable daata into the table.
+**The widget will be usable once you import your Masjid's prayer timetable data into the table.**
 
 You can use either sql import or csv import to feed data into your table. Please check the directory names 'sample' for the format of file to be imported.
 
@@ -57,10 +58,10 @@ Once the above is done, The widget will allow you
 
 - To display prayer time either vertically or horizontally.
 
-- to display 'Jamah time' only.
+- To display 'Jamah time' only if you chose.
 
 - You can aslo show Hanafi Asr start time.
 
 == Screenshots ==
-1. `/assets/screenshot-1.png` Horizontal timing
-2. `/assets/screenshot-2.png` Vertical timing
+1. Horizontal timing
+2. Vertical timing
