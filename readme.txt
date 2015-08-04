@@ -54,7 +54,7 @@ The table definition must follow:
 
 You can use either sql import or csv import to feed data into your table. Please check the sample format of file to be imported.
 [samples](https://github.com/mrahma01/daily-prayer-time/tree/master/sample)
-Or you can [email](mmrs151@gmail.com) me if you need help for free. 
+Or you can contact me if you need help for free.
 
 Once the above is done, The widget will allow you
 

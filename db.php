@@ -24,7 +24,9 @@ class DatabaseConnection
                 return $row;
             }
         }
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
 
         return false;
     }
