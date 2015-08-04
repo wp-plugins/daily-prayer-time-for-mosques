@@ -41,7 +41,7 @@ class TimeTable
         }
 
         return
-        '<table>
+        '<table class="timetable">
             <tr><th></th>
                 <th style="text-align:center">Fajr</th>
                 <th style="text-align:center">Zuhr</th>
@@ -74,7 +74,7 @@ class TimeTable
         }
 
         return
-        '<table>
+        '<table class="timetable">
             <tr>
              <th colspan="3" style="text-align:center">'.$this->formatDate($row['d_date']).'</th>
             </tr>
@@ -108,7 +108,7 @@ class TimeTable
     private function verticalTimeJamahOnly($row)
     {
         return
-        '<table>
+        '<table class="timetable">
             <tr><th colspan="6" style="text-align:center">'.$this->formatDate($row['d_date']).'</th></tr>
             <tr><th></th>
                 <th style="text-align:center">Fajr</th>
@@ -132,7 +132,7 @@ class TimeTable
     private function horizontalTimeJamahOnly($row)
     {
         return
-        '<table style="text-align:center">
+        '<table class="timetable">
             <tr>
              <th colspan="2" style="text-align:center">'.$this->formatDate($row['d_date']).'</th>
             </tr>

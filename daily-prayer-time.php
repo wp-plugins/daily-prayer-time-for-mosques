@@ -17,6 +17,7 @@ class DailyPrayerTime extends WP_Widget
             'className' => 'DailyPrayerTime',
             'description' => 'Show daily prayer time vertically or horizontally'
         );
+        $this->add_stylesheet();
         $this->timeTable = new TimeTable();
 
         parent::__construct('DailyPrayerTime', 'Daily Prayer Time', $widget_details);
@@ -86,7 +87,15 @@ class DailyPrayerTime extends WP_Widget
             echo $this->timeTable->horizontalTime();
         }
     }
+
+    public function add_stylesheet() {
+          // Respects SSL, Style.css is relative to the current file
+          wp_register_style( 'timetable-style', plugins_url('styles.css', __FILE__) );
+          wp_enqueue_style( 'timetable-style' );
+    }
 }
+
+
 add_action('widgets_init', 'init_my_widget');
 
 function init_my_widget()

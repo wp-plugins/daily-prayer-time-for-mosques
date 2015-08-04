@@ -1,0 +1,39 @@
+table.timetable {
+    width: 100%;
+    border-collapse: separate;
+    font-size:0.9em;
+    font-family:Arial;
+}
+table.timetable tr:nth-child(even) {
+    background: #def
+}
+table.timetable tr td{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+ table.timetable tr td{
+    padding: 0px;
+}
+ table.timetable tr th{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid orange;
+    font-weight:bold;
+}
+table.timetable tr td.jamah{
+    font-weight: bold;
+    background-color: #e1eafe;
+}
+table.timetable tr:hover {
+    background-color: mintcream;
+}
+table.timetable tr.today{
+    padding:2;
+    font-weight: bold;
+    background-color: #e1eafe;
+    border-collapse:collapse;
+}
+table.timetable tr.today td{
+    border: 1px solid orange;
+}
