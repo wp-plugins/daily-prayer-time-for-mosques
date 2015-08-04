@@ -2,10 +2,10 @@
 /*
 Plugin Name: Daily Prayer Time
 Version: 1.0
-Plugin URI: http://comingsoon.com
+Plugin URI: https://wordpress.org/plugins/daily-prayer-time-for-mosques/
 Description: Show daily prayer time vertically or horizontally
-Author: Mustafiz
-Author URI: http://mustafiz.com/
+Author: mmrs151
+Author URI: http://mmrs151.tumblr.com/
 */
 include 'timetable.php';
 
