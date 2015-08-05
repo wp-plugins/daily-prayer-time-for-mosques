@@ -3,6 +3,7 @@ table.timetable {
     border-collapse: separate;
     font-size:0.9em;
     font-family:Arial;
+    color: grey;
 }
 table.timetable tr:nth-child(even) {
     background: #def
