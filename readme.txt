@@ -64,6 +64,16 @@ Once the above is done, The widget will allow you
 
 - You can aslo show Hanafi Asr start time.
 
+== Frequently Asked Questions ==
+
+= Why my time table is showing all zeros(0)? =
+
+You will need to create the database table as described in the installation and import your mosque's timetable data into it to see the times.
+
+= Why my date is showing '1, Jan 1970' =
+
+Because you do not have any database or your date format is not valid mysql format, which is (YYYY-MM-DD)
+
 == Screenshots ==
 1. Horizontal timing
 2. Vertical timing
