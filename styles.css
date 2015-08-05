@@ -21,8 +21,8 @@ table.timetable tr td{
     padding: 5px;
     border: 1px solid orange;
     font-weight:bold;
-    background: grey;
-    color: #fff;
+    background: #ccddee;
+    color: #000;
 }
 table.timetable tr td.jamah{
     font-weight: bold;

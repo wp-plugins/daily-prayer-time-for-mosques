@@ -171,7 +171,7 @@ class TimeTable
     {
         $db = new DatabaseConnection();
         $today = date ("Y-m-d");
-        $sql = "SELECT * FROM ".DB_NAME.".timetable WHERE d_date = '$today' LIMIT 1";
+        $sql = "SELECT * FROM ".DB_NAME.".wp_timetable WHERE d_date = '$today' LIMIT 1";
 
         return $db->returnArray($sql);
     }
