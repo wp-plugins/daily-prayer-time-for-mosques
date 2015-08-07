@@ -26,35 +26,13 @@ The widget will allow you
 4. Finally, just go under Plugins and activate the plugin
 
 = Comprehensive setup =
-This widget requires a database table named 'timetable' in your own wordpress database.
 
-The table definition must follow:
+**The widget will be usable once you import your Masjid's prayer timetable data into the 'wp_timetable', which is created as part of installation.**
 
-    CREATE TABLE `timetable` (
-    `timetable_id` int(3) NOT NULL AUTO_INCREMENT,
-    `timetable_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `d_date` date DEFAULT NULL,
-    `fajr_begins` time DEFAULT NULL,
-    `fajr_jamah` time DEFAULT NULL,
-    `sunrise` time DEFAULT NULL,
-    `zuhr_begins` time DEFAULT NULL,
-    `zuhr_jamah` time DEFAULT NULL,
-    `asr_mithl_1` time DEFAULT NULL,
-    `asr_mithl_2` time DEFAULT NULL,
-    `asr_jamah` time DEFAULT NULL,
-    `maghrib_begins` time DEFAULT NULL,
-    `maghrib_jamah` time DEFAULT NULL,
-    `isha_begins` time DEFAULT NULL,
-    `isha_jamah` time DEFAULT NULL,
-    PRIMARY KEY (`timetable_id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8;`
-
-
-**The widget will be usable once you import your Masjid's prayer timetable data into the table.**
+Initially it loads the data from the provided timetable.sql, which you can also edit with your mosque's timetable.
 
 You can use either sql import or csv import to feed data into your table. Please check the sample format of file to be imported.
 [samples](https://github.com/mrahma01/daily-prayer-time/tree/master/sample)
-Or you can contact me if you need help for free.
 
 Once the above is done, The widget will allow you
 
@@ -77,3 +55,4 @@ Because you do not have any database or your date format is not valid mysql form
 == Screenshots ==
 1. Horizontal timing
 2. Vertical timing
+3. Setup screen

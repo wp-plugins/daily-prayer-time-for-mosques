@@ -10,6 +10,8 @@ class DatabaseConnection
     public function __construct()
     {
         $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $this->conn->options(MYSQLI_OPT_LOCAL_INFILE, true);
+
         if ($this->conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -30,9 +32,8 @@ class DatabaseConnection
                 return $row;
             }
         }
-        if ($conn) {
-            $conn->close();
-        }
+
+        $this->conn->close();
 
         return false;
     }
@@ -41,7 +42,6 @@ class DatabaseConnection
     {
         $sql = "CREATE TABLE `" . self::TABLE_NAME . "`(
                 `timetable_id` int(3) NOT NULL AUTO_INCREMENT,
-                `timetable_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 `d_date` date DEFAULT NULL,
                 `fajr_begins` time DEFAULT NULL,
                 `fajr_jamah` time DEFAULT NULL,
@@ -58,8 +58,22 @@ class DatabaseConnection
                 PRIMARY KEY (`timetable_id`)
                 ) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8;";
 
-        if(mysql_num_rows(mysql_query("SHOW TABLES LIKE `" . self::TABLE_NAME . "`")) != 1) {
+        $tableExist = $this->conn->query('select 1 from prayer_plugin.wp_timetable limit 1;');
+        if (! $tableExist) {
             $this->conn->query($sql);
+            $this->importTimeTable();
         }
+    }
+
+    private function importTimeTable()
+    {
+        $truncateSql = "TRUNCATE TABLE `". self::TABLE_NAME ."`";
+        $this->conn->query($truncateSql);
+
+        $query = "INSERT INTO ".DB_NAME.".`". self::TABLE_NAME ."` (`d_date`, `fajr_begins`, `fajr_jamah`, `sunrise`, `zuhr_begins`, `zuhr_jamah`, `asr_mithl_1`, `asr_mithl_2`, `asr_jamah`, `maghrib_begins`, `maghrib_jamah`, `isha_begins`, `isha_jamah`) VALUES";
+        $data = file_get_contents('timetable.sql', true);
+
+        $insertSql = $query . $data;
+        $this->conn->query($insertSql);
     }
 }
