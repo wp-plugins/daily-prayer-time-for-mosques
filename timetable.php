@@ -44,12 +44,14 @@ class TimeTable
         '<table class="timetable">
             <tr><th></th>
                 <th style="text-align:center">Fajr</th>
+                <th style="text-align:center">Sunrise</th>
                 <th style="text-align:center">Zuhr</th>
                 <th style="text-align:center">Asr</th>
                 <th style="text-align:center">Magrib</th>
                 <th style="text-align:center">Isha</th></tr>
             <tr><th style="text-align:center">Begins</th>
                 <td style="text-align:center">'.$this->formatDateForPrayer($row['fajr_begins']).'</td>
+                <td style="text-align:center" rowspan="2">'.$this->formatDateForPrayer($row['sunrise']).'</td>
                 <td style="text-align:center">'.$this->formatDateForPrayer($row['zuhr_begins']).'</td>
                 <td style="text-align:center">'.$this->formatDateForPrayer($this->asrBegins).'</td>
                 <td style="text-align:center">'.$this->formatDateForPrayer($row['maghrib_begins']).'</td>

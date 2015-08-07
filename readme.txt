@@ -46,11 +46,11 @@ Once the above is done, The widget will allow you
 
 = Why my time table is showing all zeros(0)? =
 
-You will need to create the database table as described in the installation and import your mosque's timetable data into it to see the times.
+You will need to  import your mosque's timetable data into wp_timetable to see the times.
 
 = Why my date is showing '1, Jan 1970' =
 
-Because you do not have any database or your date format is not valid mysql format, which is (YYYY-MM-DD)
+Because you do not have any data in the wp_timetable or your date format is not valid mysql format, which is (YYYY-MM-DD)
 
 == Screenshots ==
 1. Horizontal timing

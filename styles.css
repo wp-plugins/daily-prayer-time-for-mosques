@@ -12,6 +12,7 @@ table.timetable tr td{
     text-align: center;
     padding: 5px;
     border: 1px solid #ccc;
+    vertical-align: middle;
 }
  table.timetable tr td{
     padding: 0px;
