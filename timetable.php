@@ -166,6 +166,28 @@ class TimeTable
     }
 
     /**
+     * @param string $date
+     * @return bool
+     */
+    public function isValidateDateFormat($date)
+    {
+//    if (not valid date format) {
+        return true;
+//    }
+    }
+
+    /**
+     * @param string $time
+     * @return bool
+     */
+    public function isValidateTimeFormat($time)
+    {
+//    if (not valid date format) {
+        return false;
+//    }
+    }
+
+    /**
      * return todays prayer time based on day and month
      * @return array
      */
