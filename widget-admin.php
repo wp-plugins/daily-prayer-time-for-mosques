@@ -22,18 +22,19 @@ if (isset($_POST['submit'])) {
                 for ($c=0; $c < $num; $c++) {
                     if ($c == 0) {
                         if(! $t->isValidateDateFormat($data[$c])) {
-                            echo "<h3 class='error'>Invalid Date format</h3>";
+                            echo "<h3 class='error'>Invalid Date format, valid date format is <span class='important'>YYYY-MM-DD</span> </h3>";
                             var_dump($data[$c]);
                             exit;
                         }
                     } else {
                         if(! $t->isValidateTimeFormat($data[$c])) {
-                            echo "<h3 class='error'>Invalid Time format ". $data[$c] ." on ". $data[0] ." </h3>";
+                            echo "<h3 class='error'>Invalid Time format ". $data[$c] ." on ". $data[0] .", valid time format is <span class='important'>HH:MM:SS</span> </h3>";
                             var_dump($data);
                             exit;
                         }
                     }
                 }
+                echo ' insert me ';
             }
         }
         echo $row;

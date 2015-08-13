@@ -171,9 +171,9 @@ class TimeTable
      */
     public function isValidateDateFormat($date)
     {
-//    if (not valid date format) {
-        return true;
-//    }
+        $format = 'Y-m-d';
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 
     /**
@@ -182,9 +182,9 @@ class TimeTable
      */
     public function isValidateTimeFormat($time)
     {
-//    if (not valid date format) {
-        return false;
-//    }
+        $format = 'H:i:s';
+        $d = DateTime::createFromFormat($format, $time);
+        return $d && $d->format($format) == $time;
     }
 
     /**
