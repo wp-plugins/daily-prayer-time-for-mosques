@@ -41,3 +41,7 @@ table.timetable tr.today{
 table.timetable tr.today td{
     border: 1px solid orange;
 }
+
+.important {
+    color: red;
+}
