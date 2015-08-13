@@ -108,9 +108,9 @@ add_action( 'admin_menu', function (){
         'Daily Prayer Time',
         'Prayer time',
         'manage_options',
-        'prayerTime/widget-admin.php',
+        'daily-prayer-time-for-mosques/widget-admin.php',
         '',
-        plugins_url( 'prayerTime/icon.png' ),
+        plugins_url( 'daily-prayer-time-for-mosques/icon.png' ),
         79
     );
 });
