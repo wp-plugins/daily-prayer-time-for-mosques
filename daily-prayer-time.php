@@ -102,3 +102,15 @@ function init_my_widget()
 {
     register_widget('DailyPrayerTime');
 }
+
+add_action( 'admin_menu', function (){
+    add_menu_page (
+        'Daily Prayer Time',
+        'Prayer time',
+        'manage_options',
+        'prayerTime/widget-admin.php',
+        '',
+        plugins_url( 'prayerTime/icon.png' ),
+        79
+    );
+});

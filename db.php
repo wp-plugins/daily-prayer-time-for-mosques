@@ -1,79 +1,95 @@
 <?php
 
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+
 class DatabaseConnection
 {
-    const TABLE_NAME = 'wp_timetable';
 
-    /** Connection */
+    /** @var string */
+    private $tableName = "";
+
+    /** @var mysqli  */
     private $conn;
 
     public function __construct()
     {
-        $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        $this->conn->options(MYSQLI_OPT_LOCAL_INFILE, true);
+        global $wpdb;
 
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $this->tableName = DB_NAME . "." .$wpdb->prefix . "timetable";
 
         $this->createTableIfNotExist();
     }
 
     /**
-     * @param  string $sql
-     * @return boolean
+     * @return array
      */
-    public function returnArray($sql)
+    public function getPrayerTimeForToday()
     {
-        $result = $this->conn->query($sql);
+        $today = date ("Y-m-d");
+        $sql = "SELECT * FROM  $this->tableName WHERE d_date = '$today' LIMIT 1";
 
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                return $row;
-            }
-        }
+        return $this->returnArray($sql);
+    }
 
-        $this->conn->close();
+    /**
+     * @param $sql
+     * @return array
+     */
+    private function returnArray($sql)
+    {
+        global $wpdb;
+        $result = $wpdb->get_row($sql, ARRAY_A);
 
-        return false;
+        return $result;
     }
 
     private function createTableIfNotExist()
     {
-        $sql = "CREATE TABLE `" . self::TABLE_NAME . "`(
-                `timetable_id` int(3) NOT NULL AUTO_INCREMENT,
-                `d_date` date DEFAULT NULL,
-                `fajr_begins` time DEFAULT NULL,
-                `fajr_jamah` time DEFAULT NULL,
-                `sunrise` time DEFAULT NULL,
-                `zuhr_begins` time DEFAULT NULL,
-                `zuhr_jamah` time DEFAULT NULL,
-                `asr_mithl_1` time DEFAULT NULL,
-                `asr_mithl_2` time DEFAULT NULL,
-                `asr_jamah` time DEFAULT NULL,
-                `maghrib_begins` time DEFAULT NULL,
-                `maghrib_jamah` time DEFAULT NULL,
-                `isha_begins` time DEFAULT NULL,
-                `isha_jamah` time DEFAULT NULL,
-                PRIMARY KEY (`timetable_id`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8;";
+        global $wpdb;
 
-        $tableExist = $this->conn->query('select 1 from prayer_plugin.wp_timetable limit 1;');
-        if (! $tableExist) {
-            $this->conn->query($sql);
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE " . $this->tableName. "(
+                timetable_id int(3) NOT NULL AUTO_INCREMENT,
+                d_date date DEFAULT NULL,
+                fajr_begins time DEFAULT NULL,
+                fajr_jamah time DEFAULT NULL,
+                sunrise time DEFAULT NULL,
+                zuhr_begins time DEFAULT NULL,
+                zuhr_jamah time DEFAULT NULL,
+                asr_mithl_1 time DEFAULT NULL,
+                asr_mithl_2 time DEFAULT NULL,
+                asr_jamah time DEFAULT NULL,
+                maghrib_begins time DEFAULT NULL,
+                maghrib_jamah time DEFAULT NULL,
+                isha_begins time DEFAULT NULL,
+                isha_jamah time DEFAULT NULL,
+                PRIMARY KEY  (timetable_id)
+                ) $charset_collate;";
+
+
+        if($wpdb->get_var("SHOW TABLES LIKE 'wp_timetable'") != 'wp_timetable') {
+            dbDelta( $sql );
             $this->importTimeTable();
         }
+
     }
 
+    /**
+     * Import table on the first run
+     */
     private function importTimeTable()
     {
-        $truncateSql = "TRUNCATE TABLE `". self::TABLE_NAME ."`";
-        $this->conn->query($truncateSql);
+        global $wpdb;
 
-        $query = "INSERT INTO ".DB_NAME.".`". self::TABLE_NAME ."` (`d_date`, `fajr_begins`, `fajr_jamah`, `sunrise`, `zuhr_begins`, `zuhr_jamah`, `asr_mithl_1`, `asr_mithl_2`, `asr_jamah`, `maghrib_begins`, `maghrib_jamah`, `isha_begins`, `isha_jamah`) VALUES";
+        $truncateSql = "TRUNCATE TABLE $this->tableName";
+        $wpdb->query($truncateSql);
+
+        $query = "INSERT INTO  $this->tableName (d_date, fajr_begins, fajr_jamah, sunrise, zuhr_begins, zuhr_jamah, asr_mithl_1, asr_mithl_2, asr_jamah, maghrib_begins, maghrib_jamah, isha_begins, isha_jamah) VALUES";
         $data = file_get_contents('timetable.txt', true);
 
         $insertSql = $query . $data;
-        $this->conn->query($insertSql);
+        $wpdb->query($insertSql);
     }
 }
