@@ -86,7 +86,20 @@ class DatabaseConnection
         $truncateSql = "TRUNCATE TABLE $this->tableName";
         $wpdb->query($truncateSql);
 
-        $query = "INSERT INTO  $this->tableName (d_date, fajr_begins, fajr_jamah, sunrise, zuhr_begins, zuhr_jamah, asr_mithl_1, asr_mithl_2, asr_jamah, maghrib_begins, maghrib_jamah, isha_begins, isha_jamah) VALUES";
+        $query = "INSERT INTO  $this->tableName
+                  (d_date,
+                  fajr_begins,
+                  fajr_jamah,
+                  sunrise,
+                  zuhr_begins,
+                  zuhr_jamah,
+                  asr_mithl_1,
+                  asr_mithl_2,
+                  asr_jamah,
+                  maghrib_begins,
+                  maghrib_jamah,
+                  isha_begins,
+                  isha_jamah) VALUES";
         $data = file_get_contents('timetable.txt', true);
 
         $insertSql = $query . $data;

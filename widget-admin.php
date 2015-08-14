@@ -1,6 +1,5 @@
 <?php
-
-require_once('timetable.php');
+require_once('Validator.php');
 
 ini_set('auto_detect_line_endings', true);
 
@@ -12,7 +11,16 @@ if (isset($_POST['submit'])) {
         $row = 0;
 
         if (($handle = fopen($temp, "r")) !== FALSE) {
-            $t = new TimeTable();
+            $validator = new Validator();
+
+            $file = file($temp);
+            $count = count($file);
+            if (! $validator->isValidNumberOfRows($count)) {
+                echo "<h3 class='error'>Your file do not have data for full year. Found data for $count days only</h3>";
+                goBack();
+                exit;
+            }
+
             /** skip column headings */
             fgetcsv($handle);
 
@@ -21,13 +29,13 @@ if (isset($_POST['submit'])) {
                 $row++;
                 for ($c=0; $c < $num; $c++) {
                     if ($c == 0) {
-                        if(! $t->isValidateDateFormat($data[$c])) {
+                        if(! $validator->isValidateDateFormat($data[$c])) {
                             echo "<h3 class='error'>Invalid Date format, valid date format is <span class='important'>YYYY-MM-DD</span> </h3>";
                             var_dump($data[$c]);
                             exit;
                         }
                     } else {
-                        if(! $t->isValidateTimeFormat($data[$c])) {
+                        if(! $validator->isValidateTimeFormat($data[$c])) {
                             echo "<h3 class='error'>Invalid Time format ". $data[$c] ." on ". $data[0] .", valid time format is <span class='important'>HH:MM:SS</span> </h3>";
                             var_dump($data);
                             exit;
@@ -37,19 +45,22 @@ if (isset($_POST['submit'])) {
                 echo ' insert me ';
             }
         }
-        echo $row;
+        echo "<h3>" . $row . " Inserted</h3>";
         fclose($handle);
     } else {
         echo "<h1 class='error'>Invalid csv file</h1>";
     }
 }
 
-
+function goBack()
+{
+    echo "<a href='javascript:history.back()'><h3 class='important'>Go Back</h3> </a>";
+}
 
 ?>
 
 <div xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <h1>Set prayer time for your mosque</h1>
+    <h1>Set prayer time for your mosque</h1></br>
     <h2><a href="http://plugins.svn.wordpress.org/daily-prayer-time-for-mosques/trunk/sample.csv"> Download csv template</a></h2>
     <h2 class="important">Please update the csv with your mosque's timetable before upload.
     Valid date format is <span class="error">YYYY-MM-DD</span> and valid time format is <span class="error">HH:MM:SS</span></h2>

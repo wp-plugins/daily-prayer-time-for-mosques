@@ -166,28 +166,6 @@ class TimeTable
     }
 
     /**
-     * @param string $date
-     * @return bool
-     */
-    public function isValidateDateFormat($date)
-    {
-        $format = 'Y-m-d';
-        $d = DateTime::createFromFormat($format, $date);
-        return $d && $d->format($format) == $date;
-    }
-
-    /**
-     * @param string $time
-     * @return bool
-     */
-    public function isValidateTimeFormat($time)
-    {
-        $format = 'H:i:s';
-        $d = DateTime::createFromFormat($format, $time);
-        return $d && $d->format($format) == $time;
-    }
-
-    /**
      * return todays prayer time based on day and month
      * @return array
      */
