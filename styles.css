@@ -76,8 +76,15 @@ table.timetable tr.today td{
 
 .error {
     color: red;
+    text-align: center;
 }
 
 .important {
     color: blue;
+    text-align: center;
+}
+
+.success {
+    color: green;
+    text-align: center;
 }

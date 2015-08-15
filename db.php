@@ -6,6 +6,9 @@ require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 class DatabaseConnection
 {
 
+    /** @var string  */
+    private $dbTable = "";
+
     /** @var string */
     private $tableName = "";
 
@@ -16,7 +19,8 @@ class DatabaseConnection
     {
         global $wpdb;
 
-        $this->tableName = DB_NAME . "." .$wpdb->prefix . "timetable";
+        $this->tableName = $wpdb->prefix . "timetable";
+        $this->dbTable = DB_NAME . "." .$wpdb->prefix . "timetable";
 
         $this->createTableIfNotExist();
     }
@@ -27,9 +31,43 @@ class DatabaseConnection
     public function getPrayerTimeForToday()
     {
         $today = date ("Y-m-d");
-        $sql = "SELECT * FROM  $this->tableName WHERE d_date = '$today' LIMIT 1";
+        $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
 
         return $this->returnArray($sql);
+    }
+
+    public function truncateTable()
+    {
+        global $wpdb;
+
+        $truncateSql = "TRUNCATE TABLE $this->dbTable";
+        $wpdb->query($truncateSql);
+    }
+    /**
+     * @param array $row
+     */
+    public function insertRow($row)
+    {
+        global $wpdb;
+
+        $wpdb->insert(
+            $this->tableName,
+            array(
+                'd_date'        => $row['d_date'],
+                'fajr_begins'   => $row['fajr_begins'],
+                'fajr_jamah'    => $row['fajr_jamah'],
+                'sunrise'       => $row['sunrise'],
+                'zuhr_begins'   => $row['zuhr_begins'],
+                'zuhr_jamah'    => $row['zuhr_jamah'],
+                'asr_mithl_1'   => $row['asr_mithl_1'],
+                'asr_mithl_2'   => $row['asr_mithl_2'],
+                'asr_jamah'     => $row['asr_jamah'],
+                'maghrib_begins'=> $row['maghrib_begins'],
+                'maghrib_jamah' => $row['maghrib_jamah'],
+                'isha_begins'   => $row['isha_begins'],
+                'isha_jamah'    => $row['isha_jamah'],
+            )
+        );
     }
 
     /**
@@ -50,7 +88,7 @@ class DatabaseConnection
 
         $charset_collate = $wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE " . $this->tableName. "(
+        $sql = "CREATE TABLE " . $this->dbTable. "(
                 timetable_id int(3) NOT NULL AUTO_INCREMENT,
                 d_date date DEFAULT NULL,
                 fajr_begins time DEFAULT NULL,
@@ -68,8 +106,8 @@ class DatabaseConnection
                 PRIMARY KEY  (timetable_id)
                 ) $charset_collate;";
 
-
-        if($wpdb->get_var("SHOW TABLES LIKE 'wp_timetable'") != 'wp_timetable') {
+        $wpdb->get_var("SHOW TABLES LIKE 'wp_timetable'");
+        if($wpdb->num_rows != 1) {
             dbDelta( $sql );
             $this->importTimeTable();
         }
@@ -83,10 +121,9 @@ class DatabaseConnection
     {
         global $wpdb;
 
-        $truncateSql = "TRUNCATE TABLE $this->tableName";
-        $wpdb->query($truncateSql);
+        $this->truncateTable();
 
-        $query = "INSERT INTO  $this->tableName
+        $query = "INSERT INTO  $this->dbTable
                   (d_date,
                   fajr_begins,
                   fajr_jamah,
