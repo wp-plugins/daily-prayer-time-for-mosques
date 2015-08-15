@@ -56,3 +56,4 @@ Because you do not have any data in the wp_timetable or your date format is not 
 1. Setup timetable, select options
 2. Vertical timing
 3. Horizontal timing
+4. Import your timetable
