@@ -63,6 +63,7 @@ class DailyPrayerTime extends WP_Widget
         <?php
 
         echo $args['after_widget'];
+        echo "<a href='http://edgwareict.org.uk/' target='_blank'>Donate for the plugin</a></br></br>";
     }
 
     public function update( $new_instance, $old_instance ) {

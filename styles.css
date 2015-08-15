@@ -42,49 +42,66 @@ table.timetable tr.today td{
     border: 1px solid orange;
 }
 
-.submit {
-    border-top: 1px solid #96d1f8;
-    background: #65a9d7;
-    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-    background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-    background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-    background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-    background: -o-linear-gradient(top, #3e779d, #65a9d7);
-    padding: 5px 10px;
+.submitButton {
+    width:200px;
+    height: 50px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-    color: white;
-    font-size: 14px;
-    font-family: Georgia, serif;
-    text-decoration: none;
-    vertical-align: middle;
+
 }
-.submit:hover {
-    border-top-color: #28597a;
+.submitButton:hover {
     background: #28597a;
     color: #ccc;
-}
-.submit:active {
-    border-top-color: #1b435e;
-    background: #1b435e;
 }
 
 .error {
     color: red;
-    text-align: center;
+
 }
 
 .important {
     color: blue;
-    text-align: center;
 }
 
 .success {
     color: green;
+}
+
+div.donation {
+    width: auto;
+    color: #000000;
+    background-color: #f1f1f1;
+    padding: 15px;
+    line-height: 1.15em;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+div.donation-text {
+    margin-top: 20px;
+    font-family: Consolas,"monospace";
+    width: auto;
+    background-color: #ffffff;
+    padding: 1.1%;
+    border-left: 4px solid #8AC007;
+    word-wrap: break-word;
+}
+div.donation-link {
+    margin-top: 20px;
+    width: 25%;
+    background-color: #0088cc;
+    color: white;
+    padding: 1.1%;
+    border-left: 4px solid #8AC007;
+    word-wrap: break-word;
+    font-size: medium;
     text-align: center;
+}
+div.donation-link a{
+    color: white;
+}
+div.donation-link a:hover{
+    color: black;
 }
